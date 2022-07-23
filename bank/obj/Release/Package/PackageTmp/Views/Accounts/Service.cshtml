@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Service";
+}
+
+<h2>歡迎!請選擇交易項目</h2>
+@using (Html.BeginForm())
+{
+    @ViewBag.message
+    <div>
+        @Html.ActionLink("顯示餘額", "Balance", "Accounts")
+        <br />
+        @Html.ActionLink("提款", "Withdraw", "Accounts")
+        <br />
+        @Html.ActionLink("存款", "Deposit", "Accounts")
+        <br />
+        @Html.ActionLink("轉帳", "Transfer", "Accounts")
+        <br />
+        @Html.ActionLink("查詢交易紀錄", "Record", "Accounts")
+        <br />
+    </div>
+}

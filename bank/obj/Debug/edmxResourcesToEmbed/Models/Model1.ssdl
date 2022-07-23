@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="password" Type="varchar(max)" Nullable="false" />
+    <Property Name="balance" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaction_log">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="transaction_type" Type="tinyint" Nullable="false" />
+    <Property Name="destination" Type="varchar" MaxLength="50" />
+    <Property Name="amount" Type="bigint" Nullable="false" />
+    <Property Name="balance" Type="bigint" Nullable="false" />
+    <Property Name="time" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Transaction_log_ToTable">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Transaction_log">
+        <PropertyRef Name="name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_log_ToTable_1">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Transaction_log">
+        <PropertyRef Name="destination" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction_log" EntityType="Self.Transaction_log" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Transaction_log_ToTable" Association="Self.FK_Transaction_log_ToTable">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Transaction_log" EntitySet="Transaction_log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_log_ToTable_1" Association="Self.FK_Transaction_log_ToTable_1">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Transaction_log" EntitySet="Transaction_log" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

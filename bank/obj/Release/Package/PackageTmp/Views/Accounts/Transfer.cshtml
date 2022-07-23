@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Transfer";
+}
+
+<h2>轉帳</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("轉帳帳號:")
+        <input type="text" name="transferName" required />
+        <br />
+        @Html.Label("轉帳金額:")
+        <input type="number" min="1" name="transferAmount" required />
+        <br />
+    </div>
+    @Html.ActionLink("返回", "Service", "Accounts")
+    <br />
+    <input type="submit" value="確認" />
+    <br />
+    @ViewBag.message
+}

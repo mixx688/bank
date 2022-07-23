@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="password" Type="varchar(max)" Nullable="false" />
+          <Property Name="balance" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaction_log">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="transaction_type" Type="tinyint" Nullable="false" />
+          <Property Name="destination" Type="varchar" MaxLength="50" />
+          <Property Name="amount" Type="bigint" Nullable="false" />
+          <Property Name="balance" Type="bigint" Nullable="false" />
+          <Property Name="time" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Transaction_log_ToTable">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Transaction_log">
+              <PropertyRef Name="name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_log_ToTable_1">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Transaction_log">
+              <PropertyRef Name="destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction_log" EntityType="Self.Transaction_log" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Transaction_log_ToTable" Association="Self.FK_Transaction_log_ToTable">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Transaction_log" EntitySet="Transaction_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_log_ToTable_1" Association="Self.FK_Transaction_log_ToTable_1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Transaction_log" EntitySet="Transaction_log" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="balance" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Transaction_log" Relationship="Self.FK_Transaction_log_ToTable" FromRole="Account" ToRole="Transaction_log" />
+          <NavigationProperty Name="Transaction_log1" Relationship="Self.FK_Transaction_log_ToTable_1" FromRole="Account" ToRole="Transaction_log" />
+        </EntityType>
+        <EntityType Name="Transaction_log">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="transaction_type" Type="Byte" Nullable="false" />
+          <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int64" Nullable="false" />
+          <Property Name="balance" Type="Int64" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_log_ToTable" FromRole="Transaction_log" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK_Transaction_log_ToTable_1" FromRole="Transaction_log" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Transaction_log_ToTable">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Transaction_log">
+              <PropertyRef Name="name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_log_ToTable_1">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Transaction_log" Type="Self.Transaction_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Transaction_log">
+              <PropertyRef Name="destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Transaction_log" EntityType="Self.Transaction_log" />
+          <AssociationSet Name="FK_Transaction_log_ToTable" Association="Self.FK_Transaction_log_ToTable">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Transaction_log" EntitySet="Transaction_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_log_ToTable_1" Association="Self.FK_Transaction_log_ToTable_1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Transaction_log" EntitySet="Transaction_log" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="Database1Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction_log">
+            <EntityTypeMapping TypeName="Database1Model.Transaction_log">
+              <MappingFragment StoreEntitySet="Transaction_log">
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

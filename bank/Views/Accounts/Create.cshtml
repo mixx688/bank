@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>新增帳戶</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("帳號:")
+        <input type="text" name="createUsername" required />
+        <br />
+        @Html.Label("密碼:")
+        <input type="password" name="createPassword" required />
+        <br />
+        @Html.Label("存入金額:")
+        <input type="number" min="0" name="createBalance" required />
+        <br />
+    </div>
+    @ViewBag.message
+    <input type="submit" value="新增" />
+}

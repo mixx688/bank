@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Account">
+      <EntityTypeMapping TypeName="Database1Model.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transaction_log">
+      <EntityTypeMapping TypeName="Database1Model.Transaction_log">
+        <MappingFragment StoreEntitySet="Transaction_log">
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+          <ScalarProperty Name="destination" ColumnName="destination" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

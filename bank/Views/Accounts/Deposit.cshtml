@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Deposit";
+}
+
+<h2>存款</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("請輸入存款金額:")
+        <input type="number" min="1" name="amount" required />
+        <br />
+    </div>
+    @Html.ActionLink("返回", "Service", "Accounts")
+    <br />
+    <input type="submit" value="確認" />
+    <br />
+    @ViewBag.message
+}
