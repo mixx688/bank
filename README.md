@@ -2,7 +2,8 @@
 資料庫系統設計期末專題
 ## demo
 如果有安裝IIS Express
-想看demo可以直接執行run_bank.bat
+想看demo可以直接把專案clone下來
+然後執行run_bank.bat
 ## 專題目標
 1. 使用 ASP.net MVC 架構以及 C# 實作本系統
 2. 主頁面可以新增新帳號以及輸入帳號密碼登入
